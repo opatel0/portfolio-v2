@@ -1,5 +1,6 @@
 import { initAssistant } from './../../../utils/backend'
 import { useEffect, useState } from 'react'
+import './styles.css'
 
 export default function App() {
     const [formData, setFormData] = useState({query: ''})
@@ -20,9 +21,8 @@ export default function App() {
 
     return (
         <>
-            <h1>Ojas Patel's Portfolio</h1>
-            <p>Welcome to Ojas Patel's portfolio website. I am his virtual assistant. You can explore the website as you traditionally would, or explore my modules below.</p>
-            <p>Simon says: {testData.result ? testData.result : 'loading...'}</p>
+            <h1>Hi, I'm Suresh</h1>
+            <p>Tell me about your dating problems.</p>
             <form onSubmit={handleSubmit}>
                 <textarea 
                     id="query"
