@@ -4,9 +4,12 @@ import './styles.css'
 
 export default function App() {
     const [formData, setFormData] = useState({query: ''})
-    const [testData, setTestData] = useState({})
+    const [counter, setCounter] = useState(0)
+    const [loading, setLoading] = useState(false)
+    const [testData, setTestData] = useState([])
 
     useEffect(() => {
+        setLoading(false)
     }, [testData])
 
     function handleInputChange(event) {
@@ -15,14 +18,25 @@ export default function App() {
 
     async function handleSubmit(event) {
         event.preventDefault()
-        initAssistant(formData)
-            .then(assistant => setTestData(assistant))
+        setLoading(true)
+        let messages = []
+        for (let message of testData) {
+            messages.push(message)
+        }
+        messages.push(<p key={'suresh-'+counter}>{formData.query}</p>)
+        await initAssistant(formData)
+            .then(async assistant => {
+                messages.push(<p key={'user-'+counter}>{assistant.result}</p>)
+                setCounter(counter+1)
+                setTestData(messages)
+            })
     }
 
     return (
-        <>
+        <div key='1'>
             <h1>Hi, I'm Suresh</h1>
             <p>Tell me about your dating problems.</p>
+            {loading ? 'loading...' : testData}
             <form onSubmit={handleSubmit}>
                 <textarea 
                     id="query"
@@ -32,6 +46,6 @@ export default function App() {
                     onChange={handleInputChange}></textarea>
                 <button type="submit">Submit</button>
             </form>
-        </>
+        </div>
     )
 }
