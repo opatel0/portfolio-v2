@@ -35,7 +35,7 @@ export default function App() {
     return (
         <div key='1'>
             <h1>Hi, I'm Suresh</h1>
-            <p>Tell me about your dating problems.</p>
+            <p>Ask me anything related to Ojas Patel's qualifications for your open role.</p>
             {loading ? 'loading...' : testData}
             <form onSubmit={handleSubmit}>
                 <textarea 
